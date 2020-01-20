@@ -1,5 +1,9 @@
+#ifndef LIST_H
+#define LIST_H
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <typeinfo.h>
 
 #define MALLOC_ARRAY(TYPE, LENGTH) (TYPE*) malloc(sizeof(TYPE) * LENGTH)
 #define MALLOC_PTR(TYPE) (TYPE*) malloc(sizeof(TYPE))
@@ -43,5 +47,13 @@ struct List
 	uint count;
 }
 
-List* NewList(
+#define NewList(TYPE)\
+List* RestrictedNewList()\
+{\
+	List* list = MALLOC_PTR(List);\
+	list->type = typeid(TYPE).name();\
+	list->first = list->last = nullptr;\
+	list->count = 0;\
+}\
 
+#endif
