@@ -145,9 +145,9 @@ void PrintBuffer(ushort x, ushort y, ConsBuffer* buf)
 			{
 				int index = y * buf->x + x;
 				ConsCell* cell = buf->matrix[index];
-                ConsSetBackgroundColor(cell->background->r, cell->background->g, cell->background->b);
-                ConsSetForegroundColor(cell->foreground->r, cell->foreground->g, cell->foreground->b);
-                ConsMoveCursor(x + j, y + i);
+               	 		ConsSetBackgroundColor(cell->background->r, cell->background->g, cell->background->b);
+                		ConsSetForegroundColor(cell->foreground->r, cell->foreground->g, cell->foreground->b);
+                		ConsMoveCursor(x + j, y + i);
 				putchar(cell->character);
 			}
 		}
