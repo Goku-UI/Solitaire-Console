@@ -91,5 +91,16 @@ ConsBuffer* NewBuffer(ushort size_x, ushort size_y)
 	return buf;
 }
 
+void FreeBuffer(ConsBuffer* buf)
+{
+	if(buf)
+	{
+		for(ushort i = 0, m = buf->x * buf->y; i < m; i++)
+			FreeCell(buf->matrix[i]);
+		free(buf->matrix);
+		free(buf);
+		buf = nullptr;
+	}
+}
 
 
