@@ -1,0 +1,44 @@
+PROTOTYPE SCRIPT
+
+defparams 2;
+parameters r g b;
+defarrs 20;
+cardSizeX 7;
+cardSizeY 5;
+background 255 255 255;
+foreground r g b;
+data
+line 1 +-----+,
+line 2 |     |,
+line 3 |     |,
+line 4 |     |,
+line 5 +-----+,
+end
+
+defparams => 9
+parameters => 10
+defarrs => 11
+cardSizeX => 90
+cardSizeY => 91
+background => 92
+foreground => 93
+data => 12
+line => 13
+; => 14
+, => 15
+end => 0
+
+9 2 14
+10 r g b 14
+11 20 14
+90 7 14
+91 5 14
+92 255 255 255 14
+93 r g b 14
+12
+13 1 +-----+ 15
+13 2 |     | 15
+13 3 |     | 15
+13 4 |     | 15
+13 5 +-----+ 15
+0
