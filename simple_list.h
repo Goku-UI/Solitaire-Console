@@ -1,59 +1,113 @@
-#ifndef LIST_H
-#define LIST_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <typeinfo.h>
-
-#define MALLOC_ARRAY(TYPE, LENGTH) (TYPE*) malloc(sizeof(TYPE) * LENGTH)
-#define MALLOC_PTR(TYPE) (TYPE*) malloc(sizeof(TYPE))
-
-typedef unsigned char byte;
-typedef unsigned short ushort;
-typedef unsigned int uint;
-typedef unsigned long ulong;
-
-struct slnode
+// ListNode
+// Contains the data and links to other nodes in a list.
+struct ListNode
 {
-	void* pointer;
-	slnode* next;
-	slnode* prev;
+    void* pointer;
+    ListNode* prev, * next;
 };
 
-slnode* NewSLNode(void* pointer, slnode* prev, slnode* next)
+ListNode* NewListNode(void* pointer, ListNode* prev, ListNode* next)
 {
-	slnode* node = MALLOC_PTR(slnode);
-	node->pointer = pointer;
-	node->next = next;
-	node->prev = prev;
-	return node;
+    ListNode* node = MALLOC_PTR(ListNode);
+    node->next = next;
+    node->prev = prev;
+    node->pointer = pointer;
+    return node;
 }
 
-void FreeSLNode(slnode* node)
+void FreeListNode(ListNode* node)
 {
-	if(node)
-	{
-		free(node);
-		node = nullptr;
-	}
+    if(node)
+    {
+        free(node);
+        node = nullptr;
+    }
 }
 
-//--------------
+//A ListIterator is a ListNode, but disguised. (To differentiate a Node and an Iterator)
+typedef ListNode ListIterator;
+
+bool ListIt_Next(ListIterator* it)
+{
+    if(it)
+    {
+        if(it->next)
+        {
+            it = it->next;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ListIt_Prev(ListIterator* it)
+{
+    if(it)
+    {
+        if(it->prev)
+        {
+            it = it->prev;
+            return true;
+        }
+    }
+    return false;
+}
+
+//A "#define" tag is used here to facilitate the conversion from void* to a certain type.
+#define ListIt_Data(type, iterator) (type) iterator->pointer
+
+//A list is a useful data structure.
 struct List
 {
-	char * type;
-	slnode* first;
-	slnode* last;
-	uint count;
+    ListNode* first, * last;
+    uint count;
+};
+
+List* NewList()
+{
+    List* list = MALLOC_PTR(List);
+    list->count = 0;
+    list->first = list->last = nullptr;
+    return list;
 }
 
-#define NewList(TYPE)\
-List* RestrictedNewList()\
-{\
-	List* list = MALLOC_PTR(List);\
-	list->type = typeid(TYPE).name();\
-	list->first = list->last = nullptr;\
-	list->count = 0;\
-}\
+//Note: "ptr" stands for "pointer"
+void List_pushBack(List* list, void* ptr)
+{
+    if(list)
+    {
+        
+    }
+}
+void List_pushFront(List* list, void* ptr)
+{
 
-#endif
+}
+void List_insert(List* list, ListIterator* it, void* ptr)
+{
+
+}
+void List_remove(List* list, ListIterator* it)
+{
+
+}
+void List_popBack()
+{
+
+}
+
+void List_popFront()
+{
+    
+}
+
+void FreeList(List* list)
+{
+    if(list)
+    {
+        if(list->first)
+        {
+
+        }
+    }
+}
