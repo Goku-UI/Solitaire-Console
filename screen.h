@@ -1,14 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef SCREEN_HEADER
+#define SCREEN_HEADER
 
-#define CHAR_SIZE 1
-#define MALLOC_ARRAY(TYPE, LENGTH) (TYPE*) malloc(sizeof(TYPE) * LENGTH)
-#define MALLOC_PTR(TYPE) (TYPE*) malloc(sizeof(TYPE))
-
-typedef unsigned char byte;
-typedef unsigned short ushort;
-typedef unsigned int uint;
-typedef unsigned long ulong;
+#include "simple_list.h"
 
 //IMPORTANT: we assume that the terminal handles the Escapes Sequences.
 //Escape Sequences: \x1b[...
@@ -153,3 +146,4 @@ void PrintBuffer(ushort x, ushort y, ConsBuffer* buf)
 		}
 	}
 }
+#endif
