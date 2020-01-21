@@ -81,29 +81,76 @@ void List_pushBack(List* list, void* ptr)
 {
     if(list)
     {
-        
+        if(list->first)
+            list->last = list->last->next = NewListNode(ptr, list->last, nullptr);
+        else 
+            list->last = list->first = NewListNode(ptr, nullptr, nullptr);
+        list->count++;
     }
 }
 void List_pushFront(List* list, void* ptr)
 {
-
+    if(list)
+    {
+        if(list->first)
+            list->first = list->first->prev = NewListNode(ptr, nullptr, list->first);
+        else 
+            list->last = list->first = NewListNode(ptr, nullptr, nullptr);
+        list->count++;
+    }
 }
-void List_insert(List* list, ListIterator* it, void* ptr)
+bool List_insert(List* list, ListIterator* it, void* ptr)
+{
+    if(list && it)
+    {
+        if(it->next)
+        {
+            ListNode* node = it->next;
+            it->next = NewListNode(ptr, it, node);
+            node->prev = it->next;
+        }
+        else 
+            List_pushBack(list, ptr);
+        
+        list->count++;
+        return true;
+    }
+    return false;
+}
+
+void List_popBack(List* list)
 {
 
 }
-void List_remove(List* list, ListIterator* it)
+
+void List_popFront(List* list)
 {
 
 }
-void List_popBack()
+bool List_remove(List* list, ListIterator* it)
 {
-
-}
-
-void List_popFront()
-{
-    
+    if(list && it)
+    {
+        if(it->next && it->prev)
+        {
+            
+        }
+        else if(!it->next && !it->prev)
+        {
+            List_popBack(list);
+            return true;
+        }
+        else if(it == list->first)
+        {
+            List_popFront(list);
+            return true;
+        }
+        else if(it == list->last)
+        {
+            List_popBack(list);
+            return true;
+        }
+    }
 }
 
 void FreeList(List* list)
