@@ -1,6 +1,8 @@
 #ifndef C_LIST_HEADER
 #define C_LIST_HEADER
 
+#include "base.h"
+
 // ListNode
 // Contains the data and links to other nodes in a list.
 struct ListNode
