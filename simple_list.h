@@ -120,7 +120,20 @@ bool List_insert(List* list, ListIterator* it, void* ptr)
 
 void List_popBack(List* list)
 {
-
+    if(list)
+    {
+        if(list->first == list->last)
+        {
+            FreeListNode(list->first);
+            list->last = nullptr;
+        }
+        else if(list->count > 1)
+        {
+            list->last = list->last->prev;
+            FreeListNode(list->last->next);
+        }
+        list->count--;
+    }
 }
 
 void List_popFront(List* list)
@@ -133,7 +146,12 @@ bool List_remove(List* list, ListIterator* it)
     {
         if(it->next && it->prev)
         {
-            
+            ListNode* node = it->prev;
+            node->next = it->next;
+            it->next->prev = node;
+            FreeListNode(it);
+            list->count--;
+            return true;
         }
         else if(!it->next && !it->prev)
         {
@@ -151,6 +169,7 @@ bool List_remove(List* list, ListIterator* it)
             return true;
         }
     }
+    return false;
 }
 
 void FreeList(List* list)
@@ -159,7 +178,7 @@ void FreeList(List* list)
     {
         if(list->first)
         {
-
+            List_popBack(list);
         }
     }
 }
