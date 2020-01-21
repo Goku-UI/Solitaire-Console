@@ -1,3 +1,6 @@
+#ifndef C_LIST_HEADER
+#define C_LIST_HEADER
+
 // ListNode
 // Contains the data and links to other nodes in a list.
 struct ListNode
@@ -111,3 +114,4 @@ void FreeList(List* list)
         }
     }
 }
+#endif
